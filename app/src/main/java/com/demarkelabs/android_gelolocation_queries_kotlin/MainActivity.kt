@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         queryNear?.setOnClickListener { view: View? ->
             progressDialog!!.show()
             val query = ParseQuery<ParseObject>("City")
-            query.whereNear("location", ParseGeoPoint(18.018086950599134, -76.79894232253473))
+            query.whereNear("location", ParseGeoPoint(41.015137, 28.97953))
             query.findInBackground { objects: List<ParseObject>?, e: ParseException? ->
                 progressDialog!!.dismiss()
                 if (e == null) {
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             val query = ParseQuery<ParseObject>("City")
             query.whereWithinKilometers(
                 "location",
-                ParseGeoPoint(18.018086950599134, -76.79894232253473),
+                ParseGeoPoint(41.015137, 28.97953),
                 3000.0
             )
             query.findInBackground { objects: List<ParseObject>?, e: ParseException? ->
@@ -63,6 +63,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
         queryWithinPolygon?.setOnClickListener { view: View? ->
             progressDialog!!.show()
             val query = ParseQuery<ParseObject>("City")
@@ -71,6 +72,8 @@ class MainActivity : AppCompatActivity() {
             val geoPoint3 = ParseGeoPoint(-59.997149373299166, -76.52969196322749)
             val geoPoint4 = ParseGeoPoint(-9.488786415007201, -18.346101586021952)
             val geoPoint5 = ParseGeoPoint(15.414859532811047, -60.00625459569375)
+            val geoPoint6 = ParseGeoPoint(41.015137, 28.97953)
+
             val list: MutableList<ParseGeoPoint> =
                 ArrayList()
             list.add(geoPoint1)
@@ -78,6 +81,7 @@ class MainActivity : AppCompatActivity() {
             list.add(geoPoint3)
             list.add(geoPoint4)
             list.add(geoPoint5)
+            list.add(geoPoint6)
             query.whereWithinPolygon("location", list)
             query.findInBackground { objects: List<ParseObject>?, e: ParseException? ->
                 progressDialog!!.dismiss()
